@@ -36,11 +36,12 @@
       <div class="user-profile">
         <button {{action "edit"}}>Edit</button>
         <button {{action "delete"}}>Delete</button>
+        {{#link-to "users.create" class="create-btn"}} Add user {{/link-to}}
         <img {{bind-attr src="avatarUrl"}} alt="User's avatar" />
         <h2>{{name}}</h2>
         <span>{{email}}</span>
         <p>{{bio}}</p>
-        <span>Created {{creationDate}}</span>
+        <span>Created {{formatDate creationDate}}</span>
       </div>
 
       {{#if deleteMode}}
@@ -77,17 +78,22 @@
 
     <script src="lib/jquery-2.0.3.js"></script>
     <script src="lib/handlebars-1.0.0.js"></script>
+    <script src="lib/moment-2.4.0.js"></script>
     <script src="http://builds.emberjs.com/beta/ember.js"></script>
     <script src="http://builds.emberjs.com/beta/ember-data.js"></script>
+    <script src="lib/ember-localstorage-adapter.js"></script>
     <script src="app.js"></script>
     <script src="store.js"></script>
     <script src="router.js"></script>
     <script src="routes/users_route.js"></script>
     <script src="routes/user_route.js"></script>
+    <script src="routes/user_create_route.js"></script>
     <script src="routes/user_edit_route.js"></script>
     <script src="models/user.js"></script>
     <script src="controllers/users_controller.js"></script>
     <script src="controllers/user_controller.js"></script>
     <script src="controllers/user_edit_controller.js"></script>
+    <script src="controllers/user_create_controller.js"></script>
+    <script src="helpers/helpers.js"></script>
   </body>
 </html>
