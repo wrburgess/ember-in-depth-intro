@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ember Tut</title>
+  </head>
+  <body>
+
+    <script type="text/x-handlebars" id="application">
+      The App
+      {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" id="index">
+      {{#link-to "users"}}Go to the users page{{/link-to}}
+    </script>
+
+    <script type="text/x-handlebars" id="users">
+      <ul class="users-listing">
+        {{#each user in controller}}
+          <li>
+            {{#link-to "user" user}}
+              {{user.name}}
+            {{/link-to}}
+          </li>
+        {{else}}
+          <li>no users...</li>
+        {{/each}}
+
+        <div>Users: {{usersCount}}</div>
+
+        {{outlet}}
+      </ul>
+    </script>
+
+    <script type="text/x-handlebars" id="user">
+      <div class="user-profile">
+        <button {{action "edit"}}>Edit</button>
+        <button {{action "delete"}}>Delete</button>
+        <img {{bind-attr src="avatarUrl"}} alt="User's avatar" />
+        <h2>{{name}}</h2>
+        <span>{{email}}</span>
+        <p>{{bio}}</p>
+        <span>Created {{creationDate}}</span>
+      </div>
+
+      {{#if deleteMode}}
+      <div class="confirm-box">
+        <h4>Really?</h4>
+        <button {{action "confirmDelete"}}> Yes </button>
+        <button {{action "cancelDelete"}}> No </button>
+      </div>
+      {{/if}}
+
+      {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" id="user/edit">
+      <div class="user-edit">
+        <label>Choose user avatar</label>
+        {{input value=avatarUrl}}
+
+        <label>User name</label>
+        {{input value=name}}
+
+        <label>User email</label>
+        {{input value=email}}
+
+        <label>User short bio</label>
+        {{textarea value=bio}}
+
+        <div class="save">
+          Whet?
+          <button {{action "save"}}>SAVE</button>
+        </div>
+      </div>
+    </script>
+
+    <script src="lib/jquery-2.0.3.js"></script>
+    <script src="lib/handlebars-1.0.0.js"></script>
+    <script src="http://builds.emberjs.com/beta/ember.js"></script>
+    <script src="http://builds.emberjs.com/beta/ember-data.js"></script>
+    <script src="app.js"></script>
+    <script src="store.js"></script>
+    <script src="router.js"></script>
+    <script src="routes/users_route.js"></script>
+    <script src="routes/user_route.js"></script>
+    <script src="routes/user_edit_route.js"></script>
+    <script src="models/user.js"></script>
+    <script src="controllers/users_controller.js"></script>
+    <script src="controllers/user_controller.js"></script>
+    <script src="controllers/user_edit_controller.js"></script>
+  </body>
+</html>
